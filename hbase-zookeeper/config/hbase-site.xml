@@ -31,6 +31,6 @@
   </property>
   <property>
     <name>hbase.zookeeper.quorum</name>
-    <value>hbase-master,region-server1,region-server2</value>
+    <value>hbase-master,hbase-region1,hbase-region2</value>
   </property>
 </configuration>

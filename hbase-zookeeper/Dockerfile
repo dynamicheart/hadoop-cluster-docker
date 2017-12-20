@@ -24,16 +24,21 @@ RUN wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/stable/zookeeper-
     rm zookeeper-3.4.10.tar.gz
 
 # set environment variable
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV HBASE_HOME=/usr/local/hbase
 ENV ZK_HOME=/usr/local/zookeeper
 ENV PATH=$PATH:/usr/local/hbase/bin:/usr/local/zookeeper/bin
 
-RUN mkdir -p ~/zookeeper/data && \
-    mkdir -p ~/zookeeper/logs
+# ssh without key
+RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+RUN mkdir -p ~/zookeeper
 
 COPY config/* /tmp/
 
-RUN mv /tmp/hbase-site.xml $HBASE_HOME/conf/hbase-site.xml && \
+RUN mv /tmp/ssh_config ~/.ssh/config && \
+    mv /tmp/hbase-site.xml $HBASE_HOME/conf/hbase-site.xml && \
     mv /tmp/hbase-env.sh $HBASE_HOME/conf/hbase-env.sh && \
     mv /tmp/backup-masters $HBASE_HOME/conf/backup-masters && \
     mv /tmp/regionservers $HBASE_HOME/conf/regionservers && \
@@ -44,6 +49,8 @@ RUN mv /tmp/hbase-site.xml $HBASE_HOME/conf/hbase-site.xml && \
 
 RUN chmod +x $HBASE_HOME/bin/start-hbase.sh && \
     chmod +x $ZK_HOME/bin/zkServer.sh && \
-    chmod +x ~/sstart-zookeeper-hbase.sh && \
+    chmod +x ~/start-zookeeper-hbase.sh && \
     chmod +x ~/start-zookeeper-region1.sh && \
     chmod +x ~/start-zookeeper-region2.sh
+
+CMD [ "sh", "-c", "service ssh start; bash"]

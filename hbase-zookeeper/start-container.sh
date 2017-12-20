@@ -1,34 +1,31 @@
 #!/bin/bash
 
 # the default node number is 3
-N=${1:-3}
-
+N=${1:-2}
 
 # start hadoop master container
-sudo docker rm -f hadoop-master &> /dev/null
-echo "start hadoop-master container..."
+sudo docker rm -f hbase-master &> /dev/null
+echo "start hbase-master container..."
 sudo docker run -itd \
                 --net=hadoop \
-                -p 50070:50070 \
-                -p 8088:8088 \
                 -p 16010:16010 \
-                --name hadoop-master \
-                --hostname hadoop-master \
-                hadoop-hbase-zookeeper:latest &> /dev/null
+                --name hbase-master \
+                --hostname hbase-master \
+                hbase-zookeeper:latest &> /dev/null
 
 # start hadoop slave container
 i=1
-while [ $i -lt $N ]
+while [ $i -le $N ]
 do
-	sudo docker rm -f hadoop-slave$i &> /dev/null
-	echo "start hadoop-slave$i container..."
+	sudo docker rm -f hbase-region$i &> /dev/null
+	echo "start hbase-region$i container..."
 	sudo docker run -itd \
 	                --net=hadoop \
-	                --name hadoop-slave$i \
-	                --hostname hadoop-slave$i \
-	                hadoop-hbase-zookeeper:latest &> /dev/null
+	                --name hbase-region$i \
+	                --hostname hbase-region$i \
+	                hbase-zookeeper:latest &> /dev/null
 	i=$(( $i + 1 ))
 done
 
 # get into hadoop master container
-sudo docker exec -it hadoop-master bash
+sudo docker exec -it hbase-master bash

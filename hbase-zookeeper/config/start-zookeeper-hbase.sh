@@ -1,6 +1,6 @@
 echo -e "\n"
 
-echo 2 > ~/zookeeper/myid
+echo 0 > ~/zookeeper/myid
 $ZK_HOME/bin/zkServer.sh start
 
 echo -e "\n"
