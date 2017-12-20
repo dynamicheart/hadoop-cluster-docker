@@ -33,8 +33,4 @@
     <name>hbase.zookeeper.quorum</name>
     <value>hadoop-master,hadoop-slave1,hadoop-slave2</value>
   </property>
-  <property>
-    <name>hbase.zookeeper.property.dataDir</name>
-    <value>/root/zookeeper</value>
-  </property>
 </configuration>

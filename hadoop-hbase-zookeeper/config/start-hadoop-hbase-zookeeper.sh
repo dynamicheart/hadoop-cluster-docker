@@ -10,7 +10,7 @@ $HADOOP_HOME/sbin/start-yarn.sh
 
 echo -e "\n"
 
-$ZK_HOME/bin/
+$ZK_HOME/bin/zkServer.sh start
 
 echo -e "\n"
 
