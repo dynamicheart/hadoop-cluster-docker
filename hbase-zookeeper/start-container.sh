@@ -11,6 +11,7 @@ sudo docker run -itd \
                 --net=hadoop \
                 -p 50070:50070 \
                 -p 8088:8088 \
+                -p 16010:16010 \
                 --name hadoop-master \
                 --hostname hadoop-master \
                 hadoop-hbase-zookeeper:latest &> /dev/null

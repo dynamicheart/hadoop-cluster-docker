@@ -31,6 +31,6 @@
   </property>
   <property>
     <name>hbase.zookeeper.quorum</name>
-    <value>hadoop-master,hadoop-slave1,hadoop-slave2</value>
+    <value>hbase-master,region-server1,region-server2</value>
   </property>
 </configuration>
