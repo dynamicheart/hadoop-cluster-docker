@@ -11,3 +11,7 @@ Host hadoop-*
 Host hbase-*
   StrictHostKeyChecking no
   UserKnownHostsFile=/dev/null
+
+Host spark-*
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
