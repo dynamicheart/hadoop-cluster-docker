@@ -1,5 +1,5 @@
 |Hostname     |Zookeeper| HDFS                        |HBASE                       |Spark |
-|-------------|---------|-----------------------------|----------------------------|      |
+|-------------|---------|-----------------------------|----------------------------|------|
 |hadoop-master|         |NameNode<br>SecondaryNameNode|                            |      |
 |hadoop-slave |         |DataNode                     |                            |      |
 |hbase-master |YES      |                             |HMaster                     |      |
